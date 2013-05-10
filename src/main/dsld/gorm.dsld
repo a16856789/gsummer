@@ -1,0 +1,30 @@
+// this is a DSLD file
+// start off creating a custom DSL Descriptor for your Groovy DSL
+
+// The following snippet adds the 'newProp' to all types that are a subtype of GroovyObjects
+// currentType(subType('groovy.lang.GroovyObject')).accept {
+//   property name : 'newProp', type : String, provider : 'Sample DSL', doc : 'This is a sample.  You should see this in content assist for GroovyObjects: <pre>newProp</pre>'
+// }
+
+currentType(annotatedBy("javax.persistence.Entity")).accept {
+	def typeName = currentType.name
+	
+	method name: "get", isStatic: true, type: currentType, params: [id: Object]
+	method name: "load", isStatic: true, type: currentType, params: [id: Object]
+	method name: "save", type: currentType
+	method name: "saveOnly", type: currentType
+	method name: "update", type: currentType
+	method name: "merge", type: currentType, optionalParams: [updateWhenExist: boolean, forceCascade: boolean]
+	method name: "delete", type: currentType
+	
+	method name: "executeUpdate", isStatic: true, type : Integer
+	
+	method name: "find", isStatic: true, type: currentType, declaringType: currentType
+	method name: "findAll", isStatic: true, type: "java.util.List<${typeName}>", declaringType: currentType
+	method name: "where", isStatic: true, type: "java.util.List<${typeName}>", declaringType: currentType
+	method name: "loadAll", isStatic: true, type: "java.util.List<${typeName}>"
+
+	method name: "withTransaction", isStatic: true, type : Object
+	method name: "withSession", isStatic: true, type: Void, params: [action: Closure], declaringType: "org.hibernate.Session"
+}
+
