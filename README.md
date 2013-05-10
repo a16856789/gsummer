@@ -8,8 +8,8 @@ GSummer
 
 ## 配置文件 app.properties
 
-    app.package = cn.edu.zucc.woldas # 应用程序的包前缀
-    app.homepage = main/index.page   # 应用程序的首页
+    app.package  = xxx # 应用程序的包前缀
+    app.homepage = xxx # 应用程序的首页
 
 ## 数据库访问框架GORM
 
@@ -17,7 +17,7 @@ GSummer
 
 ```xml
 <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
-<property name="connection.url">jdbc:mysql://10.66.2.78:3306/woldas</property>
+<property name="connection.url">jdbc:mysql://localhost:3306/db</property>
 <property name="connection.username">root</property>
 <property name="connection.password">root</property> 
 ```
@@ -34,24 +34,6 @@ connection.password     | 密码
 ### 实体类
 
 简单的理解，一个实体类对应数据库中的一张表。
-
-```groovy
-@Entity
-class Comment {
-  @Id
-	Long    id          // 评论的ID
-	@ManyToOne(fetch = FetchType.LAZY)
-	User    user        // 评论作者的用户信息字段
-	@ManyToOne(fetch = FetchType.LAZY)
-	Status  status      // 评论的微博信息字段
-	@ManyToOne(fetch = FetchType.LAZY)
-	Comment replyComment// 评论来源评论，当本评论属于对另一评论的回复时返回此字段
-	Date    createdAt   // 评论创建时间
-	@Column(length = 1024)
-	String  text        // 评论的内容
-	String  source      // 评论的来源
-}
-```
 
 项目          | 解释
 --------------|---------------------
