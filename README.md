@@ -1,10 +1,9 @@
 GSummer
 =======
 
-* 名称：GSummer
 * 包含：
-   * 数据库访问框架：GORM
-   * MVC框架：GWeb
+   * 数据库访问框架, 基于Hibernate
+   * MVC框架
 
 ## 配置文件 app.properties
 
